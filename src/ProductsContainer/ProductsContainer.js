@@ -3,7 +3,6 @@ import ProductCard from '../ProductCard/ProductCard';
 
 const ProductsContainer = (props) => {
   const { products, searchText, filteredData } = props;
-  console.log(props);
   return (
     <Row md={8}>
       {searchText === ''

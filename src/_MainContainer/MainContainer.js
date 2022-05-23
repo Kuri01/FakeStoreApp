@@ -2,22 +2,25 @@ import React from 'react';
 import axios from 'axios';
 import Header from '../Header/Header';
 import ProductsContainer from '../ProductsContainer/ProductsContainer';
-import { Container } from 'react-bootstrap';
-
+import { Container, Spinner } from 'react-bootstrap';
+import styles from './MainContainer.module.scss';
+import CarouselContainer from '../Carousel/Carousel';
 class MainContainer extends React.Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.handleClearCart = this.handleClearCart.bind(this);
   }
 
   state = {
-    productList: [],
-    fetchError: '',
-    inCart: [],
     isLoading: true,
-    searchText: '',
+    productList: [],
     filteredData: [],
+    inCart: [],
+    cartSumPrice: 0,
+    searchText: '',
+    fetchError: '',
   };
 
   componentDidMount() {
@@ -56,8 +59,16 @@ class MainContainer extends React.Component {
   };
 
   addToCart = (product) => {
-    this.setState({ ...this.state, inCart: [...this.state.inCart, product] });
-    console.log('added');
+    this.setState({
+      ...this.state,
+      inCart: [...this.state.inCart, product],
+    });
+
+    if (this.state.inCart.includes()) console.log('added');
+  };
+
+  handleClearCart = () => {
+    this.setState({ ...this.state, inCart: [] });
   };
 
   render() {
@@ -66,16 +77,26 @@ class MainContainer extends React.Component {
         <Header
           handleSearch={this.handleSearch}
           searchText={this.state.searchText}
-          inCart={this.state.inCart.length}
+          inCart={this.state.inCart}
+          handleClearCart={this.handleClearCart}
         />
         <Container>
-          {this.state.isLoading ? null : (
-            <ProductsContainer
-              products={this.state.productList}
-              searchText={this.state.searchText}
-              filteredData={this.state.filteredData}
-              addToCart={this.addToCart}
+          {this.state.isLoading ? (
+            <Spinner
+              animation='border'
+              size='xl'
+              className={styles.loadingSpinner}
             />
+          ) : (
+            <div>
+              <CarouselContainer />
+              <ProductsContainer
+                products={this.state.productList}
+                searchText={this.state.searchText}
+                filteredData={this.state.filteredData}
+                addToCart={this.addToCart}
+              />
+            </div>
           )}
         </Container>
       </div>

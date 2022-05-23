@@ -1,9 +1,13 @@
 .cardImage {
   object-fit: cover;
-  height: 600px;
-  width: 600px;
+  height: 200px;
+  width: 100%;
 }
 
 .description {
-  height: 100px;
+  height: 200px;
+}
+
+.title {
+  height: 70px;
 }
