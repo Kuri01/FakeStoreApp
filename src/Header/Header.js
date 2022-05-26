@@ -69,6 +69,7 @@ const Header = (props) => {
           handleCloseCart={handleCloseCart}
           inCart={props.inCart}
           handleClearCart={props.handleClearCart}
+          cartAccess={props.cartAccess}
         />
 
         <LoginOffCanvas

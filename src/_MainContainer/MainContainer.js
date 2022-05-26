@@ -42,6 +42,7 @@ class MainContainer extends React.Component {
     cartSumPrice: 0,
     searchText: '',
     fetchError: '',
+    cartAccess: false,
   };
 
   componentDidMount() {
@@ -80,7 +81,13 @@ class MainContainer extends React.Component {
   };
 
   handleLogout = () => {
-    this.setState({ ...this.state, currentUser: undefined, accessAs: 'user' });
+    this.setState({
+      ...this.state,
+      currentUser: undefined,
+      accessAs: 'user',
+      inCart: [],
+      cartAccess: false,
+    });
   };
 
   handleLogin = (user) => {
@@ -93,7 +100,12 @@ class MainContainer extends React.Component {
     } else {
       console.log('Wrong access level');
     }
-    this.setState({ ...this.state, currentUser: user, accessAs: accessAs });
+    this.setState({
+      ...this.state,
+      currentUser: user,
+      accessAs: accessAs,
+      cartAccess: true,
+    });
     console.log('Logged as: ', this.state);
   };
 
@@ -123,6 +135,7 @@ class MainContainer extends React.Component {
           accessAs={this.state.accessAs}
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
+          cartAccess={this.state.cartAccess}
         />
         <Container>
           {this.state.isLoading ? (
