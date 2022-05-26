@@ -5,12 +5,13 @@ import MainContainer from './_MainContainer/MainContainer';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import LoginPage from './LoginPage/LoginPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<MainContainer />} />
+      <Route exact path='/' element={<MainContainer />} />
     </Routes>
   </BrowserRouter>
 );

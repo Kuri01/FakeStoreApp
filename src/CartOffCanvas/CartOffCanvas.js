@@ -5,7 +5,7 @@ import styles from './CartCanvas.module.scss';
 const CartCanvas = (props) => {
   console.log(props.inCart);
   return (
-    <Offcanvas show={props.show} onHide={props.handleClose}>
+    <Offcanvas show={props.showCart} onHide={props.handleCloseCart}>
       <Offcanvas.Header closeButton className={styles.canvasHeader}>
         <Offcanvas.Title className={styles.title}>Cart</Offcanvas.Title>
       </Offcanvas.Header>

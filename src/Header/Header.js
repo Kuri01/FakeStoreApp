@@ -9,12 +9,17 @@ import {
 } from 'react-bootstrap';
 import { useState } from 'react';
 import CartOffCanvas from '../CartOffCanvas/CartOffCanvas';
+import LoginOffCanvas from './../LoginCanvas/LoginOffCanvas';
 
 const Header = (props) => {
-  const [show, setShow] = useState(false);
+  const [showCart, setshowCart] = useState(false);
+  const [showLogin, setshowLogin] = useState(true);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCloseCart = () => setshowCart(false);
+  const handleshowCart = () => setshowCart(true);
+
+  const handleCloseLogin = () => setshowLogin(false);
+  const handleshowLogin = () => setshowLogin(true);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -23,7 +28,7 @@ const Header = (props) => {
 
   const handleClick = (event) => {
     event.preventDefault();
-    handleShow();
+    handleshowCart();
   };
   return (
     <Navbar bg='dark' variant='dark' expand='lg'>
@@ -45,12 +50,34 @@ const Header = (props) => {
             Cart <Badge bg='secondary'>{props.inCart.length}</Badge>
             <span className='visually-hidden'>unread messages</span>
           </Button>
+          {props.currentUser === undefined ? (
+            <Button variant='dark' className='mx-2' onClick={handleshowLogin}>
+              Login
+            </Button>
+          ) : (
+            <Button
+              variant='dark'
+              className='mx-2'
+              onClick={props.handleLogout}
+            >
+              Log out
+            </Button>
+          )}
         </Navbar.Collapse>
         <CartOffCanvas
-          show={show}
-          handleClose={handleClose}
+          showCart={showCart}
+          handleCloseCart={handleCloseCart}
           inCart={props.inCart}
           handleClearCart={props.handleClearCart}
+        />
+
+        <LoginOffCanvas
+          showLogin={showLogin}
+          handleCloseLogin={handleCloseLogin}
+          users={props.users}
+          accessAs={props.accessAs}
+          currentUser={props.currentUser}
+          handleLogin={props.handleLogin}
         />
       </Container>
     </Navbar>
